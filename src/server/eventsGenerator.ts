@@ -31,6 +31,17 @@ export class EventsGenerator {
     })
   }
 
+  updateBlogPosts = () => {
+    const service = this.context.service
+    const blogPosts = service.blogPost.getMany()
+    blogPosts.forEach(blogPost => {
+      service.blogPost.update(blogPost.id, {
+        name: faker.random.words(6),
+        description: faker.lorem.sentences(4)
+      })
+    })
+  }
+
   updateFirstComment = () => {
     const service = this.context.service
     const blogPosts = service.blogPost.getMany()
@@ -53,12 +64,13 @@ export class EventsGenerator {
   generate = () => {
     this.fillBlogPosts()
     this.fillComments()
+    this.updateBlogPosts()
     this.updateFirstComment()
     this.deleteSecondComment()
   }
 
   start = () => {
-    this.handle = setInterval(this.generate, 500)
+    this.handle = setInterval(this.generate, 4000)
   }
 
   stop = () => {

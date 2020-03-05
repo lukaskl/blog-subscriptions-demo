@@ -70,7 +70,7 @@ export const blogPostResolver: IGqlResolver = {
       subscribe: withFilter(
         (parent, args, context, info) =>
           context.pubSub.asyncIterator([BlogPostEvents.BLOG_POST_DELETED]),
-        (parent, args, context, info) => (args.postId ? parent.id === args.postId : true)
+        (parent, args, context, info) => (args.postId ? parent.blogPost.id === args.postId : true)
       )
     },
     blogPostUpdated: {
@@ -81,7 +81,7 @@ export const blogPostResolver: IGqlResolver = {
       subscribe: withFilter(
         (parent, args, context, info) =>
           context.pubSub.asyncIterator([BlogPostEvents.BLOG_POST_UPDATED]),
-        (parent, args, context, info) => (args.postId ? parent.id === args.postId : true)
+        (parent, args, context, info) => (args.postId ? parent.blogPost.id === args.postId : true)
       )
     },
     commentCreated: {
@@ -97,7 +97,10 @@ export const blogPostResolver: IGqlResolver = {
       subscribe: withFilter(
         (parent, args, context, info) =>
           context.pubSub.asyncIterator([BlogPostEvents.COMMENT_DELETED]),
-        (parent, args, context, info) => (args.postId ? parent.blogPost.id === args.postId : true)
+        (parent, args, context, info) => {
+          debugger
+          return args.postId ? parent.blogPost.id === args.postId : true
+        }
       )
     }
   } as IGqlSubscriptionTypeResolver

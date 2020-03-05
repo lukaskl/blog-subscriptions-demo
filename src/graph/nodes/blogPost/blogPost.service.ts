@@ -80,7 +80,7 @@ export class BlogPostService {
     blogPost.commentsIds.splice(blogPost.commentsIds.indexOf(commentId), 1)
 
     const result = { blogPost, comment }
-    this.pubSub.publish(BlogPostEvents.COMMENT_CREATED, result)
+    this.pubSub.publish(BlogPostEvents.COMMENT_DELETED, result)
     return result
   }
 }

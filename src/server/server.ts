@@ -14,9 +14,7 @@ const server = new ApolloServer({
   playground: true,
   tracing: true,
   cors: false,
-  subscriptions: {
-    path: 'subscriptions'
-  }
+
 })
 
 export const start = async () => {
