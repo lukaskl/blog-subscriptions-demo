@@ -1,0 +1,51 @@
+############## Types ##############
+
+# everything *non relational* from Comment type except the id
+input CommentCreate {
+  title: String!
+  content: String
+}
+
+# everything *optional* from Comment type except the id
+input CommentUpdate {
+  title: String
+  content: String
+}
+
+# All *non relational* fields of Comment
+# This might be optional and we can decide not to use it
+# Or use in a different way
+# In this case simply just matches the Comment type
+# as there are no relational fields
+# However, this is left for demonstrational purposes
+type CommentBase {
+  id: String!
+  title: String!
+  content: String
+}
+
+type Comment {
+  id: String!
+  title: String!
+  content: String
+}
+
+############## Querys and Mutations ##############
+extend type Query {
+  comment(id: String!): Comment!
+}
+
+extend type Mutation {
+  updateComment(id: String!, content: CommentUpdate!): Comment!
+}
+
+extend type Subscription {
+  commentUpdated(postId: String!): Comment!
+}
+
+############## Subscriptions return types ##############
+
+type CommentUpdatedEvent {
+  meta: EventMeta!
+  payload: Comment!
+}

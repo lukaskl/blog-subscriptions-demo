@@ -1,0 +1,26 @@
+scalar DateTime
+scalar JSON
+
+type Query {
+  # ingore the _nothing parts - it was just a workaround
+  _nothing: Int
+}
+type Mutation {
+  # ingore the _nothing parts - it was just a workaround
+  _nothing: Int
+}
+type Subscription {
+  # ingore the _nothing parts - it was just a workaround
+  _nothing: Int
+}
+
+type EventMeta {
+  createdAt: DateTime!
+  initiator: String!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}

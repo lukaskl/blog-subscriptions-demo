@@ -1,0 +1,98 @@
+############## Types ##############
+
+# everything *non relational* from BlogPost type except the id
+input BlogPostCreate {
+  isPublic: Boolean
+  name: String!
+  description: String
+}
+
+# everything *optional* from BlogPost type except the id
+input BlogPostUpdate {
+  isPublic: Boolean
+  name: String
+  description: String
+}
+
+# All *non relational* fields of BlogPost
+# This might be optional and we can decide not to use it
+# Or use in a different way
+type BlogPostBase {
+  id: String!
+  isPublic: Boolean
+  name: String!
+  description: String
+}
+
+
+type BlogPost {
+  id: String!
+  isPublic: Boolean
+  name: String!
+  description: String
+  comments: [Comment!]!
+  commentsCount: Int!
+}
+
+############## Querys and Mutations ##############
+
+extend type Query {
+  blogPosts: [BlogPost]
+  blogPost(id: String!): BlogPost
+}
+
+extend type Mutation {
+  createBlogPost(content: BlogPostCreate!): BlogPost!
+  deleteBlogPost(id: String!): BlogPostBase!
+  updateBlogPost(id: String!, content: BlogPostUpdate!): BlogPost!
+
+  createComment(postId: String!, content: CommentCreate!): CreateCommentResult!
+  deleteComment(postId: String!, commentId: String!): DeleteCommentResult!
+}
+
+extend type Subscription {
+  blogPostCreated: BlogPostCreatedEvent!
+  blogPostDeleted(postId: String): BlogPostDeletedEvent!
+  blogPostUpdated(postId: String): BlogPostUpdatedEvent!
+  commentCreated(postId: String!): CommentCreateEvent!
+  commentDeleted(postId: String!): CommentDeletedEvent!
+}
+
+############## Mutations return types ##############
+
+type CreateCommentResult {
+  blogPost: BlogPost!
+  comment: Comment!
+}
+
+type DeleteCommentResult {
+  comment: CommentBase!
+  blogPost: BlogPost!
+}
+
+############## Subscriptions return types ##############
+
+type BlogPostCreatedEvent {
+  meta: EventMeta!
+  payload: BlogPost!
+}
+
+type BlogPostUpdatedEvent {
+  meta: EventMeta!
+  payload: BlogPost!
+}
+
+type BlogPostDeletedEvent {
+  meta: EventMeta!
+  payload: BlogPostBase!
+}
+
+type CommentDeletedEvent {
+  meta: EventMeta!
+  payload: DeleteCommentResult!
+}
+
+type CommentCreateEvent {
+  meta: EventMeta!
+  payload: CreateCommentResult!
+}

@@ -1,0 +1,13 @@
+{
+   "typescriptHero.resolver.workspaceIgnorePatterns": [
+        "**/build/**/*",
+        "**/out/**/*",
+        "**/dist/**/*",
+        "**/.cache/**/*"
+    ],
+    "cSpell.words": [
+        "nanoid",
+        "signup",
+        "submodule"
+    ]
+}

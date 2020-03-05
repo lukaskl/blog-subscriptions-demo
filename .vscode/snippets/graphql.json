@@ -1,0 +1,9 @@
+{
+	"tslint:disable": {
+		"prefix": "tsd",
+		"body": [
+			"/* tslint:disable-next-line ${1:no-any} */ // ${2:reason}"
+		],
+		"description": "tslint:disable next line"
+	}
+}

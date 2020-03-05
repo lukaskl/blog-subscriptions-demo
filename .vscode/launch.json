@@ -1,0 +1,56 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch",
+      "stopOnEntry": false,
+      "args": [],
+      "cwd": "${workspaceRoot}",
+      "preLaunchTask": null,
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "node_modules/webpack/bin/webpack.js",
+        "--config",
+        "./config/webpack.config.dev.js"
+      ],
+      "env": {
+        "NODE_ENV": "development",
+        "DEBUG": "true"
+      },
+      "timeout": 30000,
+      "console": "internalConsole",
+      "port": 9230,
+      "sourceMaps": true,
+      "outFiles": []
+    },
+    {
+      "name": "Run mocha-webpack",
+      "type": "node",
+      "request": "launch",
+      "port": 9229,
+      "program": "${workspaceRoot}/node_modules/mocha-webpack/bin/mocha-webpack",
+      "stopOnEntry": false,
+      "sourceMaps": true,
+      "args": [
+        "--colors",
+        "--watch",
+        "--webpack-config", "./config/webpack.config.test.js",
+        "config/test_index.js"
+      ],
+      "cwd": "${workspaceRoot}",
+      "preLaunchTask": null,
+      "runtimeExecutable": null,
+      "runtimeArgs": [
+        "--inspect-brk=0.0.0.0:9229",
+      ],
+      "env": { "NODE_ENV": "testing"},
+      "console": "internalConsole",
+      "outFiles": []
+    }
+  ]
+}
