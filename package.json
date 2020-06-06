@@ -18,7 +18,7 @@
   "author": "Lukas Klusis",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.11.0",
+    "apollo-server": "^2.14.2",
     "dotenv": "^6.0.0",
     "faker": "^4.1.0",
     "google-auth-library": "^1.5.0",
